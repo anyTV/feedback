@@ -23,6 +23,7 @@ export interface FeedbackOptions {
   backgroundOpacity?: number;
   allowedTags?: string[];
   footnote?: string;
+  additionalInfo?: string;
   endpoint: string;
 }
 
@@ -243,6 +244,7 @@ export class Feedback {
 
     const data = {
       description: this._form[0].value,
+      additionalinfo: this._options.additionalInfo,
       screenshot: this._screenshotCanvas.toDataURL()
     };
 
