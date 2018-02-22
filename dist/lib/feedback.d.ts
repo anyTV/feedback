@@ -3,6 +3,7 @@ export interface FeedbackOptions {
     backgroundOpacity?: number;
     allowedTags?: string[];
     footnote?: string;
+    additionalInfo?: string;
     endpoint: string;
 }
 export interface HTML2CanvasOptions {
