@@ -3,8 +3,8 @@ export interface FeedbackOptions {
     backgroundOpacity?: number;
     allowedTags?: string[];
     footnote?: string;
-    additionalInfo?: string;
     endpoint: string;
+    additional?: object;
 }
 export interface HTML2CanvasOptions {
     async?: boolean;
@@ -29,7 +29,6 @@ export interface HTML2CanvasOptions {
 }
 export declare class Feedback {
     private _options;
-    private _optionsKeys;
     private _html2canvasOptions;
     private _initState;
     private _initArea;

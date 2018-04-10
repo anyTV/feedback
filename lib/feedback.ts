@@ -24,8 +24,8 @@ export interface FeedbackOptions {
   backgroundOpacity?: number;
   allowedTags?: string[];
   footnote?: string;
-  additionalInfo?: string;
   endpoint: string;
+  additional?: object;
 }
 
 export interface HTML2CanvasOptions {
@@ -101,11 +101,8 @@ export class Feedback {
       `Go to the Legal Help page to request content changes for legal reasons. `
       + `Your feedback, additional info, and email will be sent to Feedback. `
       + `See Privacy Policy and Terms of Service.`,
-    endpoint: 'https://very-api-so-cool.url/',
-    additionalInfo: ''
+    endpoint: 'https://very-api-so-cool.url/'
   };
-
-  private _optionsKeys = _.keys(this._options)
 
   private _html2canvasOptions: HTML2CanvasOptions = {
     allowTaint: true
@@ -248,9 +245,8 @@ export class Feedback {
 
     const data = {
       description: this._form[0].value,
-      additionalinfo: this._options.additionalInfo,
       screenshot: this._screenshotCanvas.toDataURL(),
-      ..._.omit(this._options, this._optionsKeys) // include user custom fields
+      ...this._options.additional
     };
 
     fetch(this._options.endpoint, {
