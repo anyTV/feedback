@@ -323,11 +323,7 @@ class Feedback {
         this._showSending();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        const data = {
-            description: this._form[0].value,
-            additionalinfo: this._options.additionalInfo,
-            screenshot: this._screenshotCanvas.toDataURL()
-        };
+        const data = Object.assign({ description: this._form[0].value, screenshot: this._screenshotCanvas.toDataURL() }, this._options.additional);
         fetch(this._options.endpoint, {
             method: 'POST',
             headers: headers,

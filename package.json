@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ivoviz/feedback#readme",
   "dependencies": {
-    "html2canvas": "1.0.0-alpha.9"
+    "html2canvas": "1.0.0-alpha.9",
+    "lodash": "^4.17.5"
   }
 }

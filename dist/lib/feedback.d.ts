@@ -3,8 +3,8 @@ export interface FeedbackOptions {
     backgroundOpacity?: number;
     allowedTags?: string[];
     footnote?: string;
-    additionalInfo?: string;
     endpoint: string;
+    additional?: object;
 }
 export interface HTML2CanvasOptions {
     async?: boolean;

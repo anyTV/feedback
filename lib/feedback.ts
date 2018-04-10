@@ -1,4 +1,5 @@
 import * as html2canvas from 'html2canvas';
+import * as _ from 'lodash';
 
 /*
   TODO:
@@ -23,8 +24,8 @@ export interface FeedbackOptions {
   backgroundOpacity?: number;
   allowedTags?: string[];
   footnote?: string;
-  additionalInfo?: string;
   endpoint: string;
+  additional?: object;
 }
 
 export interface HTML2CanvasOptions {
@@ -244,8 +245,8 @@ export class Feedback {
 
     const data = {
       description: this._form[0].value,
-      additionalinfo: this._options.additionalInfo,
-      screenshot: this._screenshotCanvas.toDataURL()
+      screenshot: this._screenshotCanvas.toDataURL(),
+      ...this._options.additional
     };
 
     fetch(this._options.endpoint, {
