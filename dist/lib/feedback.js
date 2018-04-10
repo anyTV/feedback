@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const html2canvas = require("html2canvas");
+const _ = require("lodash");
 class Feedback {
     constructor(options, html2canvasOptions) {
         this._options = {
@@ -15,8 +16,10 @@ class Feedback {
             footnote: `Go to the Legal Help page to request content changes for legal reasons. `
                 + `Your feedback, additional info, and email will be sent to Feedback. `
                 + `See Privacy Policy and Terms of Service.`,
-            endpoint: 'https://very-api-so-cool.url/'
+            endpoint: 'https://very-api-so-cool.url/',
+            additionalInfo: ''
         };
+        this._optionsKeys = _.keys(this._options);
         this._html2canvasOptions = {
             allowTaint: true
         };
@@ -323,11 +326,8 @@ class Feedback {
         this._showSending();
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        const data = {
-            description: this._form[0].value,
-            additionalinfo: this._options.additionalInfo,
-            screenshot: this._screenshotCanvas.toDataURL()
-        };
+        const data = Object.assign({ description: this._form[0].value, additionalinfo: this._options.additionalInfo, screenshot: this._screenshotCanvas.toDataURL() }, _.omit(this._options, this._optionsKeys) // include user custom fields
+        );
         fetch(this._options.endpoint, {
             method: 'POST',
             headers: headers,

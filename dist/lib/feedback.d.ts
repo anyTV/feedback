@@ -29,6 +29,7 @@ export interface HTML2CanvasOptions {
 }
 export declare class Feedback {
     private _options;
+    private _optionsKeys;
     private _html2canvasOptions;
     private _initState;
     private _initArea;

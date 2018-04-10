@@ -1,4 +1,5 @@
 import * as html2canvas from 'html2canvas';
+import * as _ from 'lodash';
 
 /*
   TODO:
@@ -100,8 +101,11 @@ export class Feedback {
       `Go to the Legal Help page to request content changes for legal reasons. `
       + `Your feedback, additional info, and email will be sent to Feedback. `
       + `See Privacy Policy and Terms of Service.`,
-    endpoint: 'https://very-api-so-cool.url/'
+    endpoint: 'https://very-api-so-cool.url/',
+    additionalInfo: ''
   };
+
+  private _optionsKeys = _.keys(this._options)
 
   private _html2canvasOptions: HTML2CanvasOptions = {
     allowTaint: true
@@ -245,7 +249,8 @@ export class Feedback {
     const data = {
       description: this._form[0].value,
       additionalinfo: this._options.additionalInfo,
-      screenshot: this._screenshotCanvas.toDataURL()
+      screenshot: this._screenshotCanvas.toDataURL(),
+      ..._.omit(this._options, this._optionsKeys) // include user custom fields
     };
 
     fetch(this._options.endpoint, {
